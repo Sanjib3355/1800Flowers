@@ -40,10 +40,11 @@ class UserControllerTest {
 	public void testGetUpdatedUserList() throws Exception {
 
 		/*
-		 * when(service.getUpdatedUserList(url, ModifyUserData)).thenReturn(list);
+		 * when(service.getUpdatedUserList(url, positionToUpdate)).thenReturn(list);
 		 * assertEquals(Integer.MIN_VALUE,
-		 * userController.getUpdatedUserList(url,ModifyUsersData,request));
+		 * userController.getUpdatedUserList(url,positionToUpdate,request));
 		 */
+
 		/*
 		 * mockMvc.perform(get("/getUniqueUserIds")).andExpect(status().isOk())
 		 * .andExpect(jsonPath("$.title", Matchers.is("1800flowers")))
@@ -53,7 +54,6 @@ class UserControllerTest {
 	}
 
 	@Test
-
 	public void testGetUniqueUserIds() throws Exception {
 
 		/*
