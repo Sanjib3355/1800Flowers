@@ -8,8 +8,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,7 +29,8 @@ public class UserServiceImpl implements UserService {
 
 		jsonArr.put(listofActualObj.get(positionToUpdate));
 		Map<String, String> passedValues = (HashMap<String, String>) jsonArr.get(0);
-
+		JSONObject retObj = new JSONObject();
+		
 		try {
 			for (Entry<String, String> mapTemp : passedValues.entrySet()) {
 				if (mapTemp.getKey().equalsIgnoreCase("title")) {
@@ -35,9 +41,11 @@ public class UserServiceImpl implements UserService {
 			listofActualObj.set(3, passedValues.toString());
 		}
 
-		catch (Exception e) {
-			// Return 500 Error with custom message
+		catch (Exception ex) {
+			// Return 500 Error with some custom error message
 			// e.printStackTrace();
+			retObj.put("message", "FAILED");
+			retObj.put("statusCode", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return listofActualObj;
 	}
@@ -53,7 +61,8 @@ public class UserServiceImpl implements UserService {
 
 		List<Object> listofActualObj = null;
 		listofActualObj = getUserData(url);
-
+		JSONObject retObj = new JSONObject();
+		
 		try {
 			if (listofActualObj != null && listofActualObj.size() > 0) {
 				for (int i = 0; i < listofActualObj.size(); i++) {
@@ -66,12 +75,16 @@ public class UserServiceImpl implements UserService {
 					}
 				}
 			} else {
-				// Return 404 error with custom error message.
+				// Return 404 error with some custom error message.
+				retObj.put("message", "FAILURE");
+				retObj.put("statusCode", HttpStatus.BAD_REQUEST);
 
 			}
-		} catch (Exception e) {
-			// Return 500 Error with custom message
-			// e.printStackTrace();
+		} catch (Exception ex) {
+			// Return 500 Error with some custom error message
+			// ex.printStackTrace();
+			retObj.put("message", "FAILED");
+			retObj.put("statusCode", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return uniqueUserIds.size();
 	}
