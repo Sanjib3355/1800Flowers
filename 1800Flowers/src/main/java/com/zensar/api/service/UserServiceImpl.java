@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 		jsonArr.put(listofActualObj.get(positionToUpdate));
 		Map<String, String> passedValues = (HashMap<String, String>) jsonArr.get(0);
 		JSONObject retObj = new JSONObject();
-		
+
 		try {
 			for (Entry<String, String> mapTemp : passedValues.entrySet()) {
 				if (mapTemp.getKey().equalsIgnoreCase("title")) {
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
 		List<Object> listofActualObj = null;
 		listofActualObj = getUserData(url);
 		JSONObject retObj = new JSONObject();
-		
+
 		try {
 			if (listofActualObj != null && listofActualObj.size() > 0) {
 				for (int i = 0; i < listofActualObj.size(); i++) {
