@@ -34,14 +34,17 @@ public class UserController {
 			if (updatedUserList != null) {
 				ObjectMapper jsonMapper = new ObjectMapper();
 				retObj.put("message", "SUCCESS");
+				retObj.put("statusCode", HttpStatus.OK);
 				retObj.put("upadtedUserList", jsonMapper.writeValueAsString(updatedUserList));
 			} else {
 				retObj.put("message", "FAILURE");
+				retObj.put("statusCode", HttpStatus.BAD_REQUEST);
 				return new ResponseEntity<String>(String.valueOf(retObj), HttpStatus.BAD_REQUEST);
 			}
 
 		} catch (Exception e) {
-			retObj.put("message", "FAILURE");
+			retObj.put("message", "FAILED");
+			retObj.put("statusCode", HttpStatus.INTERNAL_SERVER_ERROR);
 			return new ResponseEntity<String>(String.valueOf(retObj), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<String>(String.valueOf(retObj), HttpStatus.OK);
@@ -55,14 +58,17 @@ public class UserController {
 			int uniqueUserIDs = service.getUniqueUserIds(url);
 			if (uniqueUserIDs > 0) {
 				retObj.put("message", "SUCCESS");
+				retObj.put("statusCode", HttpStatus.OK);
 				retObj.put("uniqueUserIDCount", uniqueUserIDs);
 			} else {
 				retObj.put("message", "FAILURE");
+				retObj.put("statusCode", HttpStatus.BAD_REQUEST);
 				return new ResponseEntity<String>(String.valueOf(retObj), HttpStatus.BAD_REQUEST);
 			}
 
 		} catch (Exception e) {
-			retObj.put("message", "FAILURE");
+			retObj.put("message", "FAILED");
+			retObj.put("statusCode", HttpStatus.INTERNAL_SERVER_ERROR);
 			return new ResponseEntity<String>(String.valueOf(retObj), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<String>(String.valueOf(retObj), HttpStatus.OK);
