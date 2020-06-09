@@ -42,7 +42,7 @@ public class UserController {
 				return new ResponseEntity<String>(String.valueOf(retObj), HttpStatus.BAD_REQUEST);
 			}
 
-		} catch (Exception e) {
+		} catch (Exception ex) {
 			retObj.put("message", "FAILED");
 			retObj.put("statusCode", HttpStatus.INTERNAL_SERVER_ERROR);
 			return new ResponseEntity<String>(String.valueOf(retObj), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -66,7 +66,7 @@ public class UserController {
 				return new ResponseEntity<String>(String.valueOf(retObj), HttpStatus.BAD_REQUEST);
 			}
 
-		} catch (Exception e) {
+		} catch (Exception ex) {
 			retObj.put("message", "FAILED");
 			retObj.put("statusCode", HttpStatus.INTERNAL_SERVER_ERROR);
 			return new ResponseEntity<String>(String.valueOf(retObj), HttpStatus.INTERNAL_SERVER_ERROR);
